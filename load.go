@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"reflect"
+	"strings"
 
 	"github.com/jackskj/carta/value"
 )
@@ -96,7 +97,9 @@ func loadRow(m *Mapper, row []interface{}, rsv *resolver) error {
 			if cell.IsNull() {
 				_, nullable := value.NullableTypes[typ]
 				if !(isDstPtr || nullable) {
-					return errors.New(fmt.Sprintf("carta: cannot load null value to type %s for column %s", typ, col.name))
+					if 0 != strings.Compare(typ.Name(), "bool") {
+						return errors.New(fmt.Sprintf("carta: cannot load null value to type %s for column %s", typ, col.name))
+					}
 				}
 				// no need to set destination if cell is null
 			} else {
