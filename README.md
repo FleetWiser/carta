@@ -1,3 +1,10 @@
+# Package info 
+
+Forked from https://github.com/jackskj/carta
+
+Changes: 
+* Correct null pointer behavior for `*bool`
+* Added basic support of `sql.Scanner`
 
 # Carta
 Dead simple SQL data mapper for complex Go structs. 
@@ -174,7 +181,7 @@ Other types, such as TIME, will will be converted from plain text in future vers
 
 ## Installation 
 ```
-go get -u github.com/jackskj/carta
+go get -u github.com/FleetWiser/carta
 ```
 
 

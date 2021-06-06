@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/jackskj/carta/value"
+	"github.com/FleetWiser/carta/value"
 )
 
 func (m *Mapper) loadRows(rows *sql.Rows, colTyps []*sql.ColumnType) (*resolver, error) {
@@ -102,6 +102,16 @@ func loadRow(m *Mapper, row []interface{}, rsv *resolver) error {
 					}
 				}
 				// no need to set destination if cell is null
+			} else if col.scannable {
+				if isDstPtr {
+					err = loadElem.Field(int(col.i)).Interface().(sql.Scanner).Scan(cell.GetByte())
+				} else {
+					err = loadElem.Field(int(col.i)).Addr().Interface().(sql.Scanner).Scan(cell.GetByte())
+				}
+
+				if err != nil {
+					return err
+				}
 			} else {
 				switch kind {
 				case reflect.Bool:

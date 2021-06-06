@@ -6,12 +6,14 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/jackskj/carta/value"
+	"github.com/FleetWiser/carta/value"
 )
 
 const (
 	CartaTagKey string = "db"
 )
+
+var _scannerInterface = reflect.TypeOf((*sql.Scanner)(nil)).Elem()
 
 // SQL Map cardinality can either be:
 // Association: has-one relationship, must be nested structs in the response
@@ -212,7 +214,7 @@ func findSubMaps(t reflect.Type) (map[fieldIndex]*Mapper, error) {
 	}
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
-		if isExported(field) && isSubMap(field.Type) {
+		if isExported(field) && isSubMap(field.Type) && !isScannable(field.Type) {
 			if subMap, err = newMapper(field.Type); err != nil {
 				return nil, err
 			}
@@ -291,6 +293,10 @@ func isBasicType(t reflect.Type) bool {
 		return true
 	}
 	return false
+}
+
+func isScannable(t reflect.Type) bool {
+	return reflect.PtrTo(t).Implements(_scannerInterface)
 }
 
 // test wether the type to be set is a pointer to a struct, courtesy of BQ api

@@ -9,8 +9,8 @@ Please follow the code of conduct when interacting with the carta project.
 The recommended PR process is as follows.
 
 1. Please first discuss the change you wish to make via issue.
-2. Upgrade with `go get -u github.com/jackskj/carta`
-3. cd `$GOPATH/src/github.com/jackskj/carta`
+2. Upgrade with `go get -u github.com/FleetWiser/carta`
+3. cd `$GOPATH/src/github.com/FleetWiser/carta`
 4. Reflect your changes in example files as well as the README. 
 5. You can use gazelle functions (gazelle, repos, and fix) from the Makefile. 
 6. Make sure that the build succedes with `go build` or `make build` 

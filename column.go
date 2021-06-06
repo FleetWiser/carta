@@ -12,6 +12,7 @@ type column struct {
 	name        string
 	columnIndex int
 	i           fieldIndex
+	scannable bool
 }
 
 func allocateColumns(m *Mapper, columns map[string]column) error {
@@ -34,14 +35,25 @@ func allocateColumns(m *Mapper, columns map[string]column) error {
 			for i, field := range m.Fields {
 				candidates = getColumnNameCandidates(field.Name, m.AncestorNames)
 				// can only allocate columns to basic fields
-				if isBasicType(field.Typ) {
+				basic := isBasicType(field.Typ)
+				scannable := isScannable(field.Typ)
+
+				if basic || scannable {
 					if _, ok := candidates[cName]; ok {
-						presentColumns[cName] = column{
+						nc := column{
 							typ:         c.typ,
 							name:        cName,
 							columnIndex: c.columnIndex,
 							i:           i,
+							scannable: scannable,
 						}
+
+						if !basic {
+							nc.scannable = scannable
+						}
+
+						presentColumns[cName] = nc
+
 						delete(columns, cName) // dealocate claimed column
 					}
 				}

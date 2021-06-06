@@ -21,8 +21,8 @@ type Cell struct {
 	kind       reflect.Kind // data type with which Cell will be instantiated
 	bits       uint64       //IEEE 754 binary representation of numeric value
 	text       string       // non-numeric data as bytes for data which arrives as string or []byte
-	time       time.Time    //  any data that arrives as time, that includes timestame w/ or w/o zone
-	colTypName string       // Used for parting if some data arrices in plain text format, ex, if time arrives as string
+	time       time.Time //  any data that arrives as time, that includes timestame w/ or w/o zone
+	colTypName string    // Used for parting if some data arrices in plain text format, ex, if time arrives as string
 	valid      bool
 }
 
@@ -36,6 +36,10 @@ func ConvertsionError(convErr error, typ reflect.Type) error {
 
 func NewCell(colTypName string) *Cell {
 	return &Cell{colTypName: colTypName}
+}
+
+func (c *Cell) GetByte() []byte {
+	return []byte(c.text)
 }
 
 // implements database/sql scan interface

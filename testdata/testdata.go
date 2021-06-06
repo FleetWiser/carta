@@ -6,9 +6,9 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/FleetWiser/carta/testdata/initdb"
 	"github.com/golang/protobuf/ptypes"
 	timestamppb "github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/jackskj/carta/testdata/initdb"
 
 	// default deivers
 	_ "github.com/go-sql-driver/mysql"

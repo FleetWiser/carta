@@ -174,7 +174,7 @@ Other types, such as TIME, will will be converted from plain text in future vers
 
 ## Installation 
 ```
-go get -u github.com/jackskj/carta
+go get -u github.com/FleetWiser/carta
 ```
 
 

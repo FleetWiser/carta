@@ -13,9 +13,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackskj/carta"
-	td "github.com/jackskj/carta/testdata"
-	"github.com/jackskj/carta/testdata/initdb"
+	"github.com/FleetWiser/carta"
+	td "github.com/FleetWiser/carta/testdata"
+	"github.com/FleetWiser/carta/testdata/initdb"
 	diff "github.com/yudai/gojsondiff"
 	"github.com/yudai/gojsondiff/formatter"
 	"google.golang.org/grpc"

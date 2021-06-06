@@ -4,7 +4,7 @@ package initdb;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/jackskj/carta/testdata/initdb;initdb";
+option go_package = "github.com/FleetWiser/carta/testdata/initdb;initdb";
 
 service InitService {
   rpc InitDB (InitRequest) returns (EmptyResponse) {}
